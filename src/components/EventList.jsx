@@ -39,10 +39,10 @@ const EventList = () => {
       setPastEvents(past);
       setUpcomingEvents(upcoming);
     }
-  }, [events]); // This effect depends on the 'events' state
+  }, [events]);
 
   return (
-    <div>
+    <div className="container mx-auto px-2 py-6">
       {/* Upcoming Events */}
       <h2 className="text-2xl font-semibold mb-4">Upcoming Events</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

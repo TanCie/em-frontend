@@ -1,18 +1,19 @@
 import EventList from "./components/EventList";
 import Navbar from "./components/Navbar";
 import { CreateEvent } from "./pages/CreateEvent";
+import { Routes, Route } from "react-router-dom";
+import EventsPage from "./pages/EventsPage";
 
 function App() {
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="text-red-200">Helllo</div>
-      <div className="container mx-auto p-4">
-        <EventList />
-      </div>
-      <p id="cally1"></p>
-      <CreateEvent />
-    </>
+      <EventsPage />
+      <Routes>
+        <Route path="/" element={<EventList />} />
+        <Route path="/create" element={<CreateEvent />} />
+      </Routes>
+    </div>
   );
 }
 
