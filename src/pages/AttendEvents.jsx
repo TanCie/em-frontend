@@ -1,7 +1,10 @@
 // MY REGISTERED EVENTS
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../auth/AuthCheck";
 
-const MyRegisteredEvents = ({ userId }) => {
+const MyRegisteredEvents = () => {
+  const { userId } = useContext(AuthContext);
+
   const [events, setEvents] = useState([]);
 
   useEffect(() => {

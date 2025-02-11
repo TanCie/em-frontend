@@ -3,9 +3,19 @@ import { CiCalendar } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../auth/AuthCheck";
 
 const EventCard = ({ event }) => {
+  const { userId } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [hasJoined, setHasJoined] = useState(false);
+
+  useEffect(() => {
+    if (event.joinedUsers && userId && event.joinedUsers.includes(userId)) {
+      setHasJoined(true);
+    }
+  }, [event.joinedUsers, userId]);
 
   const handleAttend = async (eventId) => {
     const token = localStorage.getItem("token"); // Check if user is logged in
@@ -34,6 +44,10 @@ const EventCard = ({ event }) => {
 
       const data = await res.json();
       alert(data.message);
+
+      if (data.success) {
+        setHasJoined(true);
+      }
       navigate(`/events/${eventId}`); // Redirect to description page
     } catch (error) {
       console.error("Error:", error);
@@ -65,7 +79,6 @@ const EventCard = ({ event }) => {
           </span>
         </div>
 
-        {/* DO THIS LINK FIXXXX */}
         <Link
           to={`/events/${event._id}`}
           className="text-sm text-gray-300 hover:underline"
@@ -85,7 +98,7 @@ const EventCard = ({ event }) => {
           <span className="ml-2">{event.location}</span>
         </div>
 
-        {/* Attendees & Price */}
+        {/* Attendees & Join Button */}
         <div className="flex justify-between items-center mt-1">
           <div className="flex items-center text-gray-400 text-sm">
             <IoPeopleSharp className="text-lg text-green-400" />
@@ -94,14 +107,20 @@ const EventCard = ({ event }) => {
           <div className="flex items-center font-medium text-gray-200">
             <button
               onClick={() => handleAttend(event._id)}
-              disabled={new Date(event.date) < new Date()} // Disable if event date is in the past
+              disabled={hasJoined || new Date(event.date) < new Date()} // Disable if already joined or event ended
               className={`px-4 py-2 font-semibold rounded-lg transition duration-300 ${
-                new Date(event.date) < new Date()
+                hasJoined
+                  ? "btn btn-sm btn-disabled cursor-not-allowed"
+                  : new Date(event.date) < new Date()
                   ? "btn btn-sm btn-ghost cursor-not-allowed"
                   : "btn btn-sm btn-accent btn-outline rounded-lg"
               }`}
             >
-              {new Date(event.date) < new Date() ? "Event ended" : "Join Event"}
+              {hasJoined
+                ? "Joined"
+                : new Date(event.date) < new Date()
+                ? "Event ended"
+                : "Join Event"}
             </button>
           </div>
         </div>

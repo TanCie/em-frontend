@@ -3,12 +3,24 @@ import moment from "moment";
 import utils from "../lib/utils";
 import EventCard from "../components/EventCard";
 import { FaSearch } from "react-icons/fa";
+import { MdArrowDropDown } from "react-icons/md";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("All");
+
+  const categories = [
+    "Select a Category",
+    "technology",
+    "music",
+    "psychology",
+    "food",
+    "sports",
+    "TV",
+    "social",
+  ];
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -50,7 +62,7 @@ const EventList = () => {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         {/* Search Bar */}
         <div className="relative flex-1">
-          <FaSearch className="absolute left-3 top-3 text-gray-400" />
+          <FaSearch className="absolute left-4 top-4 text-gray-400" />
           <input
             type="text"
             placeholder="Search events..."
@@ -60,17 +72,23 @@ const EventList = () => {
           />
         </div>
         {/* Category Dropdown */}
-        <select
-          className="select select-bordered h-12 min-w-[160px]"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="All">All Categories</option>
-          <option value="technology">Technology</option>
-          <option value="music">Music</option>
-          <option value="psychology">Psychology</option>
-          <option value="food">Food</option>
-        </select>
+
+        <div className="relative w-full max-w-xs">
+          <select
+            className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-700 border border-gray-600 rounded-lg shadow-md appearance-none"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {categories.map((cat) => (
+              <option value={cat} key={cat} className="text-gray-200">
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+            <MdArrowDropDown className="text-2xl" />
+          </div>
+        </div>
       </div>
 
       {/* Upcoming Events */}
