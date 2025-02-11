@@ -66,7 +66,10 @@ const EventCard = ({ event }) => {
         </div>
 
         {/* DO THIS LINK FIXXXX */}
-        <Link to={"/events"} className="text-sm text-gray-300 hover:underline">
+        <Link
+          to={`/events/${event._id}`}
+          className="text-sm text-gray-300 hover:underline"
+        >
           Click here to know more...
         </Link>
 

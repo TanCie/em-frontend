@@ -1,33 +1,32 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../auth/AuthCheck";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Use AuthContext
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { login } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
-      login(res.data.token); // Store token & update state
-      alert("Login successful");
-      navigate("/"); // Redirect after login
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        login(data.token, data.userId); // Store token & update state
+        alert("Login successful");
+        navigate("/");
+      } else {
+        alert("Login failed");
+      }
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.message);
     }
   };
 
@@ -44,8 +43,8 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
@@ -56,8 +55,8 @@ const Login = () => {
             <input
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />

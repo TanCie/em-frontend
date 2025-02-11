@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../auth/AuthCheck";
 
 const CreateEventForm = ({ onSubmit }) => {
+  const { userId } = useContext(AuthContext);
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -54,6 +57,7 @@ const CreateEventForm = ({ onSubmit }) => {
       description,
       location,
       date,
+      createdBy: userId,
     };
 
     try {
