@@ -32,9 +32,9 @@ const createEvent = async (eventData) => {
   }
 };
 
-const updateEvent = async (id, eventData) => {
+const updateEvent = async (id, userId, action) => {
   try {
-    const response = await axios.patch(`${API_URL}/update/${id}`, eventData);
+    const response = await axios.patch(`${API_URL}/update/${id}`, { userId, action });
     return response.data;
   } catch (error) {
     console.error(`Error updating event ${id}:`, error);

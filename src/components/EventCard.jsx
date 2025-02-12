@@ -2,59 +2,9 @@ import moment from "moment";
 import { CiCalendar } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../auth/AuthCheck";
+import { Link } from "react-router-dom";
 
 const EventCard = ({ event }) => {
-  const { userId } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [hasJoined, setHasJoined] = useState(false);
-
-  useEffect(() => {
-    if (event.joinedUsers && userId && event.joinedUsers.includes(userId)) {
-      setHasJoined(true);
-    }
-  }, [event.joinedUsers, userId]);
-
-  const handleAttend = async (eventId) => {
-    const token = localStorage.getItem("token"); // Check if user is logged in
-
-    if (!token) {
-      alert("You need to log in first!");
-      navigate("/login");
-      return;
-    }
-
-    const confirmJoin = window.confirm(
-      "Are you sure you want to join this event?"
-    );
-    if (!confirmJoin) return;
-
-    try {
-      const res = await fetch(
-        `http://localhost:5000/api/event-register/${eventId}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`, // Send token for authentication
-          },
-        }
-      );
-
-      const data = await res.json();
-      alert(data.message);
-
-      if (data.success) {
-        setHasJoined(true);
-      }
-      navigate(`/events/${eventId}`); // Redirect to description page
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to register for event");
-    }
-  };
-
   return (
     <div className="w-full max-w-sm rounded-lg shadow-md bg-gray-900 overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       {/* Event Image */}
@@ -81,7 +31,7 @@ const EventCard = ({ event }) => {
 
         <Link
           to={`/events/${event._id}`}
-          className="text-sm text-gray-300 hover:underline"
+          className="text-sm text-blue-200 hover:text-blue-400 hover:underline"
         >
           Click here to know more...
         </Link>
@@ -105,23 +55,17 @@ const EventCard = ({ event }) => {
             <span className="ml-2">{event.attendees} going</span>
           </div>
           <div className="flex items-center font-medium text-gray-200">
-            <button
-              onClick={() => handleAttend(event._id)}
-              disabled={hasJoined || new Date(event.date) < new Date()} // Disable if already joined or event ended
+            <Link
+              to={`/events/${event._id}`}
+              disabled={new Date(event.date) < new Date()} // Disable if already joined or event ended
               className={`px-4 py-2 font-semibold rounded-lg transition duration-300 ${
-                hasJoined
-                  ? "btn btn-sm btn-disabled cursor-not-allowed"
-                  : new Date(event.date) < new Date()
-                  ? "btn btn-sm btn-ghost cursor-not-allowed"
+                new Date(event.date) < new Date()
+                  ? "btn btn-sm btn-ghost"
                   : "btn btn-sm btn-accent btn-outline rounded-lg"
               }`}
             >
-              {hasJoined
-                ? "Joined"
-                : new Date(event.date) < new Date()
-                ? "Event ended"
-                : "Join Event"}
-            </button>
+              {new Date(event.date) < new Date() ? "Event ended" : "Join Event"}
+            </Link>
           </div>
         </div>
       </div>

@@ -73,7 +73,7 @@ const EventList = () => {
         </div>
         {/* Category Dropdown */}
 
-        <div className="relative w-full max-w-xs">
+        <div className="relative sm:w-1/3 w-1/2">
           <select
             className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-700 border border-gray-600 rounded-lg shadow-md appearance-none"
             value={category}
