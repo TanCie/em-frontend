@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import utils from "../lib/utils"; // Import API functions
-import { AuthContext } from "../auth/AuthCheck"; // Import Auth Context
+import { AuthContext } from "../auth/AuthCheck";
+import socket from "../lib/socket";
 
 const EventDesc = () => {
   const { eventId } = useParams();
@@ -31,6 +32,14 @@ const EventDesc = () => {
     };
 
     fetchEvent();
+
+    socket.on(`eventUpdated`, (updatedEvent) => {
+      setEvent(updatedEvent);
+    });
+
+    return () => {
+      socket.off(`eventUpdated`);
+    };
   }, [eventId, userId]);
 
   const handleJoinEvent = async () => {

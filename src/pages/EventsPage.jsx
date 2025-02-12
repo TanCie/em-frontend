@@ -4,6 +4,7 @@ import utils from "../lib/utils";
 import EventCard from "../components/EventCard";
 import { FaSearch } from "react-icons/fa";
 import { MdArrowDropDown } from "react-icons/md";
+import socket from "../lib/socket";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -33,6 +34,18 @@ const EventList = () => {
       }
     };
     fetchEvents();
+
+    socket.on("eventUpdated", (updatedEvent) => {
+      setEvents((prevEvents) =>
+        prevEvents.map((event) =>
+          event._id === updatedEvent._id ? updatedEvent : event
+        )
+      );
+    });
+
+    return () => {
+      socket.off("eventUpdated");
+    };
   }, []);
 
   useEffect(() => {
