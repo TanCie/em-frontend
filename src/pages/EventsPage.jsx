@@ -18,9 +18,8 @@ const EventList = () => {
     "technology",
     "music",
     "psychology",
-    "food",
     "sports",
-    "TV",
+    "food",
     "social",
   ];
 
@@ -107,7 +106,7 @@ const EventList = () => {
 
       {/* Upcoming Events */}
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-2xl md:text-5xl font-semibold my-10">
+        <h2 className=" text-2xl md:text-5xl font-semibold my-10">
           Upcoming Events
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -116,7 +115,7 @@ const EventList = () => {
               <EventCard key={event._id} event={event} />
             ))
           ) : (
-            <p>No upcoming events found.</p>
+            <p className="text-center">No upcoming events found.</p>
           )}
         </div>
       </div>

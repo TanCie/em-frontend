@@ -80,11 +80,11 @@ const MyCreatedEvents = () => {
   };
 
   return (
-    <div className="container bg-gray-900 opacity-95 mx-auto m-4 rounded-lg p-6">
-      <h2 className="text-2xl md:text-3xl font-bold my-6 text-white">
+    <div className="flex flex-col items-center justify-center bg-gray-900 opacity-90 mx-auto mt-0 rounded-lg p-6">
+      <h2 className="text-2xl md:text-3xl font-bold mb-10 text-white">
         My Created Events
       </h2>
-      <div className="flex gap-6 flex-wrap">
+      <div className="flex justify-center gap-6 flex-wrap">
         {events.length === 0 ? (
           <p className="text-center text-gray-400">No events found.</p>
         ) : (
@@ -96,22 +96,26 @@ const MyCreatedEvents = () => {
               <img
                 src={event.image}
                 alt=""
-                className="w-full h-40 object-cover rounded-t-xl"
+                className="w-full h-60 object-cover rounded-t-xl"
               />
-              <h2 className="text-xl px-2 mt-2 text-white">{event.title}</h2>
+              <h2 className="text-xl px-2 mt-2 font-semibold text-white">
+                {event.title}
+              </h2>
 
-              <p className="text-gray-400 px-2">{event.description}</p>
+              <p className="text-gray-400 px-2 mt-2 italic">
+                {event.description}
+              </p>
 
-              <div className="flex pt-3 w-1/3 mx-auto gap-4">
+              <div className="flex mt-auto flex-col pt-3 w-1/2 mx-auto gap-4">
                 <button
                   onClick={() => handleEditClick(event)}
-                  className="btn btn-sm bg-green-600 text-white hover:bg-green-700"
+                  className="btn btn-sm rounded-lg bg-green-600 text-white hover:bg-green-700"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(event._id)}
-                  className="btn btn-sm bg-red-600 text-white hover:bg-red-700"
+                  className="btn btn-sm rounded-lg bg-red-600 text-white hover:bg-red-700"
                 >
                   Delete
                 </button>
@@ -124,7 +128,7 @@ const MyCreatedEvents = () => {
       {/* Popup Modal for Editing */}
       {editEvent && (
         <div className="fixed page-font inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-5/6 lg:w-1/3 relative">
+          <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-5/6 md:w-1/2 relative">
             {/* Close Button */}
             <button
               onClick={() => setEditEvent(null)}
