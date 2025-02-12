@@ -68,8 +68,8 @@ const CreateEventForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-800 p-8 shadow-lg rounded-lg mt-8">
-      <h2 className="text-2xl font-semibold text-center text-gray-200 mb-6">
+    <div className="container opacity-90 mx-auto bg-gray-800 p-8 shadow-lg rounded-lg mt-8 md:mt-6">
+      <h2 className="text-3xl font-semibold text-center text-green-100 mb-10">
         Create New Event
       </h2>
 
@@ -83,7 +83,7 @@ const CreateEventForm = ({ onSubmit }) => {
             </label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Enter event title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -97,7 +97,7 @@ const CreateEventForm = ({ onSubmit }) => {
             </label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Enter event category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -111,7 +111,7 @@ const CreateEventForm = ({ onSubmit }) => {
             </label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Enter event location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -125,7 +125,7 @@ const CreateEventForm = ({ onSubmit }) => {
             </label>
             <input
               type="date"
-              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
@@ -138,7 +138,7 @@ const CreateEventForm = ({ onSubmit }) => {
             Event Description
           </label>
           <textarea
-            className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
             placeholder="Enter event description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

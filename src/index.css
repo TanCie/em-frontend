@@ -1,2 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+.logo {
+  font-family: "Dancing Script";
+  font-style: italic;
+}
+.bg {
+  background: radial-gradient(circle, #00c896, #076b61, #222831, #050505);
+}
+.nav-bg {
+  background: rgba(10, 10, 10, 0.8);
+}
+.bgimg {
+  background-image: url("../public/bgimg1.jpg");
+  background-size: cover;
+  background-position: center;
+}

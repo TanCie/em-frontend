@@ -24,10 +24,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <Link to="/" className="text-2xl md:text-4xl font-bold text-green-400">
-          Evently
+    <nav className="bg-gray-900 text-white shadow-lg">
+      <div className="container mx-auto flex justify-between items-center p-4 px-6">
+        <Link
+          to="/"
+          className="text-3xl md:text-5xl font-bold text-green-400 my-4 flex items-center gap-2 transition-all duration-300"
+        >
+          <span className="font-extrabold text-6xl logo text-green-500">E</span>
+          <span className="text-green-100 tracking-wide">ventrr</span>
         </Link>
 
         {/* Mobile Menu Button */}

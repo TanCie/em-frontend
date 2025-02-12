@@ -70,7 +70,7 @@ const EventList = () => {
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
   return (
-    <div className="container mx-auto px-2 py-6 my-10">
+    <div className="container opacity-90 mx-auto px-12 pb-20 pt-16">
       {/* Search & Category Filter */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         {/* Search Bar */}
@@ -79,7 +79,7 @@ const EventList = () => {
           <input
             type="text"
             placeholder="Search events..."
-            className="input input-bordered w-full pl-10 pr-4 h-12"
+            className="input w-full pl-10 pr-4 h-12"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -88,7 +88,7 @@ const EventList = () => {
 
         <div className="relative sm:w-1/3 w-1/2">
           <select
-            className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-700 border border-gray-600 rounded-lg shadow-md appearance-none"
+            className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-800 border border-gray-600 rounded-lg shadow-md appearance-none"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >

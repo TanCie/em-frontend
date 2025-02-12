@@ -205,7 +205,7 @@ const MyCreatedEvents = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container bg-gray-900 opacity-95 mx-auto m-4 rounded-lg p-6">
       <h2 className="text-2xl md:text-3xl font-bold my-6 text-white">
         My Created Events
       </h2>
@@ -216,17 +216,17 @@ const MyCreatedEvents = () => {
           events.map((event) => (
             <div
               key={event._id}
-              className="w-full rounded-xl bg-gray-800 p-4 pb-6 md:w-1/2 lg:w-1/3 xl:w-1/4 shadow-lg hover:shadow-xl transition-all"
+              className="w-full rounded-xl bg-gray-800 p-1 pb-6 md:w-1/2 lg:w-1/3 xl:w-1/4 shadow-lg hover:shadow-xl transition-all"
             >
               <img
                 src={event.image}
                 alt=""
                 className="w-full h-40 object-cover rounded-t-xl"
               />
-              <h2 className="text-xl mt-2 text-white">{event.title}</h2>
-              <p className="text-gray-400">{event.description}</p>
+              <h2 className="text-xl px-2 mt-2 text-white">{event.title}</h2>
+              <p className="text-gray-400 px-2">{event.description}</p>
 
-              <div className="flex mt-4 gap-4">
+              <div className="flex pt-3 w-1/3 mx-auto gap-4">
                 <button
                   onClick={() => handleEditClick(event)}
                   className="btn btn-sm bg-green-600 text-white hover:bg-green-700"

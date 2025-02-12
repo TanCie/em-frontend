@@ -71,7 +71,7 @@ const EventDesc = () => {
   if (!event) return <div className="p-4 text-center">Event not found</div>;
 
   return (
-    <div className="mt-10 p-6 max-w-4xl mx-auto flex justify-center items-center flex-col md:flex-row gap-6">
+    <div className="mt-10 p-10 max-w-4xl mx-auto flex bg-gray-900 rounded-xl justify-center items-center flex-col md:flex-row gap-6">
       {/* Left Column: Image */}
       <div className="md:w-1/2">
         {event.image ? (
@@ -110,21 +110,28 @@ const EventDesc = () => {
 
         {/* Join Event Button */}
         {isLoggedIn ? (
-          <button
-            onClick={handleJoinEvent}
-            disabled={hasJoined}
-            className={`mt-4 px-4 py-2 cursor-pointer text-white rounded-md ${
-              hasJoined
-                ? "bg-gray-400 cursor-text"
-                : "bg-green-600 hover:bg-green-700"
-            }`}
-          >
-            {hasJoined ? "Joined ✅" : "Join Event"}
-          </button>
+          new Date(event.date) < new Date() ? (
+            <p className="mt-4 btn btn-ghost cursor-not-allowed  text-xl font-semibold">
+              This event has already ended.
+            </p>
+          ) : (
+            <button
+              onClick={handleJoinEvent}
+              disabled={hasJoined}
+              className={`mt-4 px-4 py-2 cursor-pointer text-white rounded-md ${
+                hasJoined
+                  ? "bg-gray-400 cursor-text"
+                  : "bg-green-600 hover:bg-green-700"
+              }`}
+            >
+              {hasJoined ? "Joined ✅" : "Join Event"}
+            </button>
+          )
         ) : (
           <p className="text-red-500">Please log in to join this event.</p>
         )}
-        {hasJoined && (
+
+        {hasJoined && !(new Date(event.date) < new Date()) && (
           <button onClick={handleLeaveEvent} className="btn bg-red-700">
             Leave Event
           </button>

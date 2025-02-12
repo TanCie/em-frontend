@@ -11,18 +11,20 @@ import ManageEvents from "./pages/ManageEvents";
 function App() {
   return (
     <AuthProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<EventsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/create" element={<CreateEvent />} />
-        <Route path="/events/:eventId" element={<EventDesc />} />
-        <Route
-          path="/event-register/my-events/:userId"
-          element={<ManageEvents />}
-        />
-      </Routes>
+      <div className="min-h-screen bgimg">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<EventsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/create" element={<CreateEvent />} />
+          <Route path="/events/:eventId" element={<EventDesc />} />
+          <Route
+            path="/event-register/my-events/:userId"
+            element={<ManageEvents />}
+          />
+        </Routes>
+      </div>
     </AuthProvider>
   );
 }
