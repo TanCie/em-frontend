@@ -54,7 +54,7 @@ const deleteEvent = async (id) => {
 
 const updateForm = async (eventId, updatedData) => {
   try {
-    const response = await fetch(`http://localhost:5000/api/events/update-form/${eventId}`, {
+    const response = await fetch(`${API_URL}events/update-form/${eventId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
