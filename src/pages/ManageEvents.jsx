@@ -80,18 +80,18 @@ const MyCreatedEvents = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-900 opacity-90 mx-auto mt-0 rounded-lg p-6">
+    <div className="flex flex-col items-center justify-center bg-gray-900 opacity-80 mx-auto mt-0 rounded-lg p-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-10 text-white">
         My Created Events
       </h2>
-      <div className="flex justify-center gap-6 flex-wrap">
+      <div className="flex flex-col items-center justify-center gap-6 flex-wrap">
         {events.length === 0 ? (
           <p className="text-center text-gray-400">No events found.</p>
         ) : (
           events.map((event) => (
             <div
               key={event._id}
-              className="w-full rounded-xl bg-gray-800 p-1 pb-6 md:w-1/2 lg:w-1/3 xl:w-1/4 shadow-lg hover:shadow-xl transition-all"
+              className="min-w-1/3 max-w-2/3 rounded-xl bg-gray-800 p-1 pb-6 shadow-lg hover:shadow-xl transition-all"
             >
               <img
                 src={event.image}
