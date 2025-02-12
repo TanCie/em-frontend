@@ -50,14 +50,14 @@ const Navbar = () => {
               <Link to="/create" className="hover:text-green-400 transition">
                 Create Event
               </Link>
-              {userId && (
-                <Link
-                  to={`/event-register/my-events/${userId}`}
-                  className="hover:text-green-400 transition"
-                >
-                  Manage My Events
-                </Link>
-              )}
+
+              <Link
+                to={`/event-register/my-events/${userId}`}
+                className="hover:text-green-400 transition"
+              >
+                Manage My Events
+              </Link>
+
               <button
                 onClick={handleLogout}
                 className="hover:text-red-300 cursor-pointer transition"
