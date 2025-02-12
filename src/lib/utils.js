@@ -52,10 +52,32 @@ const deleteEvent = async (id) => {
   }
 };
 
+const updateForm = async (eventId, updatedData) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/events/update-form/${eventId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update event");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Error updating event ${eventId}:`, error);
+    throw error;
+  }
+}
+
 export default {
   getAllEvents,
   getEventById,
   createEvent,
   updateEvent,
   deleteEvent,
+  updateForm,
 };
