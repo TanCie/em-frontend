@@ -73,7 +73,7 @@ const CreateEventForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="container w-3/4 lg:w-2/3 opacity-90 mx-auto bg-gray-800 p-8 shadow-lg rounded-lg my-8 md:my-6">
+    <div className="container w-7/8 lg:w-2/3 opacity-90 mx-auto bg-gray-800 p-8 shadow-lg rounded-lg my-8 md:my-6">
       <h2 className="text-3xl font-semibold text-center text-green-100 mb-10">
         Create New Event
       </h2>

@@ -83,7 +83,7 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col bg-gray-900 text-white text-center p-4 space-y-3">
+        <div className="md:hidden flex flex-col op bg-gray-900 text-white text-center p-4 space-y-3">
           {isLoggedIn ? (
             <>
               <Link

@@ -13,7 +13,7 @@ const EventList = () => {
   const [category, setCategory] = useState("All");
 
   const categories = [
-    "Select a Category",
+    "All Categories",
     "technology",
     "music",
     "psychology",
@@ -55,7 +55,7 @@ const EventList = () => {
         event.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    if (category !== "All") {
+    if (category !== "All Categories") {
       filtered = filtered.filter((event) => event.category === category);
     }
     setFilteredEvents(filtered);
@@ -70,7 +70,7 @@ const EventList = () => {
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
   return (
-    <div className="container page-font opacity-90 mx-auto px-12 pb-20 pt-16">
+    <div className="container page-font opacity-90 mx-auto px-8 md:px-10 pb-20 pt-16">
       {/* Search & Category Filter */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         {/* Search Bar */}
@@ -86,14 +86,14 @@ const EventList = () => {
         </div>
         {/* Category Dropdown */}
 
-        <div className="relative sm:w-1/3 w-1/2">
+        <div className="relative w-2/3 sm:w-1/3">
           <select
             className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-800 border border-gray-600 rounded-lg shadow-md appearance-none"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((cat) => (
-              <option value={cat} key={cat} className="text-gray-200">
+              <option value={cat} key={cat} className="text-gray-200 text-sm">
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
               </option>
             ))}
@@ -109,7 +109,7 @@ const EventList = () => {
         <h2 className="text-2xl md:text-5xl font-semibold my-10">
           Upcoming Events
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event) => (
               <EventCard key={event._id} event={event} />
@@ -124,7 +124,7 @@ const EventList = () => {
         <h2 className="text-2xl md:text-5xl font-semibold mt-16 mb-6">
           Past Events
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {pastEvents.length > 0 ? (
             pastEvents.map((event) => (
               <EventCard key={event._id} event={event} />

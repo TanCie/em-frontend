@@ -124,7 +124,7 @@ const MyCreatedEvents = () => {
       {/* Popup Modal for Editing */}
       {editEvent && (
         <div className="fixed page-font inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-1/3 relative">
+          <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-5/6 lg:w-1/3 relative">
             {/* Close Button */}
             <button
               onClick={() => setEditEvent(null)}
@@ -133,7 +133,7 @@ const MyCreatedEvents = () => {
               <AiOutlineClose size={20} />
             </button>
 
-            <h3 className="text-3xl font-bold text-green-300 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-green-300 mb-4">
               Edit Event
             </h3>
 
