@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import { AuthProvider } from "./auth/AuthCheck";
 import EventDesc from "./components/EventDesc";
 import ManageEvents from "./pages/ManageEvents";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             element={<ManageEvents />}
           />
         </Routes>
+        <Toaster />
       </div>
     </AuthProvider>
   );

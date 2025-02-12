@@ -70,16 +70,16 @@ const EventList = () => {
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
 
   return (
-    <div className="container opacity-90 mx-auto px-12 pb-20 pt-16">
+    <div className="container page-font opacity-90 mx-auto px-12 pb-20 pt-16">
       {/* Search & Category Filter */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         {/* Search Bar */}
         <div className="relative flex-1">
-          <FaSearch className="absolute left-4 top-4 text-gray-400" />
+          <FaSearch className="absolute left-5 top-5 text-gray-300" />
           <input
             type="text"
             placeholder="Search events..."
-            className="input w-full pl-10 pr-4 h-12"
+            className="input w-full rounded-full pl-12 pr-4 h-14"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -106,10 +106,10 @@ const EventList = () => {
 
       {/* Upcoming Events */}
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-2xl md:text-4xl font-semibold mt-8 mb-6">
+        <h2 className="text-2xl md:text-5xl font-semibold my-10">
           Upcoming Events
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event) => (
               <EventCard key={event._id} event={event} />
@@ -121,7 +121,7 @@ const EventList = () => {
       </div>
       {/* Past Events */}
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-2xl md:text-4xl font-semibold mt-16 mb-6">
+        <h2 className="text-2xl md:text-5xl font-semibold mt-16 mb-6">
           Past Events
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

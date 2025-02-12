@@ -1,4 +1,6 @@
 import CreateEventForm from "./CreateEventForm";
+import toast from "react-hot-toast";
+
 export const CreateEvent = () => {
   const handleCreateEvent = async (eventData) => {
     try {
@@ -10,10 +12,11 @@ export const CreateEvent = () => {
 
       const data = await response.json();
       console.log("Event created successfully:", data);
-      alert("Event created successfully!");
+      toast.success("Event created successfully!");
       // redirect to the event page
       window.location.href = `/`;
     } catch (error) {
+      toast.error("Error creating event. Please try again.");
       console.error("Error creating event:", error);
     }
   };

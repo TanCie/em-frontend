@@ -1,146 +1,12 @@
-// import { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../auth/AuthCheck";
-// import utils from "../lib/utils";
-
-// const MyCreatedEvents = () => {
-//   const { userId } = useContext(AuthContext);
-//   const [events, setEvents] = useState([]);
-//   const [editEvent, setEditEvent] = useState(null);
-//   const [formData, setFormData] = useState({
-//     title: "",
-//     description: "",
-//     location: "",
-//     category: "",
-//   });
-
-//   useEffect(() => {
-//     if (!userId) return;
-
-//     fetch(`http://localhost:5000/api/event-register/my-events/${userId}`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (data.events) {
-//           setEvents(data.events);
-//         } else {
-//           console.error("Failed to fetch events", data);
-//         }
-//       })
-//       .catch((error) => console.error("Error fetching events:", error));
-//   }, [userId]);
-
-//   const handleEditClick = (event) => {
-//     setEditEvent(event._id);
-//     setFormData({ title: event.title, description: event.description });
-//   };
-
-//   const handleUpdate = async () => {
-//     try {
-//       await utils.updateForm(editEvent, formData);
-//       setEvents((prevEvents) =>
-//         prevEvents.map((event) =>
-//           event._id === editEvent ? { ...event, ...formData } : event
-//         )
-//       );
-//       setEditEvent(null);
-//     } catch (error) {
-//       console.error("Error updating event:", error);
-//     }
-//   };
-
-//   return (
-//     <div className="container mx-auto p-6">
-//       <h2 className="text-2xl md:text-3xl font-bold my-6">My Created Events</h2>
-//       <div className="flex gap-6 flex-wrap">
-//         {events.length === 0 ? (
-//           <p className="text-center">No events found.</p>
-//         ) : (
-//           events.map((event) => (
-//             <div
-//               key={event._id}
-//               className="w-full rounded-xl bg-gray-800 p-2 pb-4 md:w-1/2 lg:w-1/3 xl:w-1/4"
-//             >
-//               <img
-//                 src={event.image}
-//                 alt=""
-//                 className="w-full h-40 object-cover rounded-t-xl"
-//               />
-//               <h2 className="text-xl mt-2 text-white">{event.title}</h2>
-//               <p className="text-gray-400">{event.description}</p>
-
-//               <div className="flex mt-4 gap-4">
-//                 <button
-//                   onClick={() => handleEditClick(event)}
-//                   className="btn btn-sm btn-outline text-green-300 hover:text-green-500"
-//                 >
-//                   Edit
-//                 </button>
-//                 <button className="btn btn-sm btn-outline text-red-300 hover:text-red-500">
-//                   Delete
-//                 </button>
-//               </div>
-//             </div>
-//           ))
-//         )}
-//       </div>
-
-//       {/* Popup Modal for Editing */}
-//       {editEvent && (
-//         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-//           <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-1/3">
-//             <h3 className="text-lg font-semibold text-green-300">Edit Event</h3>
-
-//             <input
-//               type="text"
-//               className="w-full p-2 my-2 border border-gray-600 rounded"
-//               value={formData.title}
-//               onChange={(e) =>
-//                 setFormData({ ...formData, title: e.target.value })
-//               }
-//               placeholder="Event Title"
-//             />
-//             <input
-//               type="text"
-//               className="w-full p-2 my-2 border border-gray-600 rounded"
-//               value={formData.location}
-//               onChange={(e) =>
-//                 setFormData({ ...formData, title: e.target.value })
-//               }
-//               placeholder="Event Location"
-//             />
-//             <textarea
-//               className="w-full p-2 my-2 border border-gray-600 rounded"
-//               value={formData.description}
-//               onChange={(e) =>
-//                 setFormData({ ...formData, description: e.target.value })
-//               }
-//               placeholder="Event Description"
-//             />
-//             <div className="flex justify-end gap-3">
-//               <button onClick={handleUpdate} className="btn btn-success">
-//                 Save
-//               </button>
-//               <button
-//                 onClick={() => setEditEvent(null)}
-//                 className="btn btn-error"
-//               >
-//                 Cancel
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default MyCreatedEvents;
-
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthCheck";
 import utils from "../lib/utils";
 import { AiOutlineClose } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const MyCreatedEvents = () => {
+  const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [editEvent, setEditEvent] = useState(null);
@@ -196,11 +62,20 @@ const MyCreatedEvents = () => {
 
   const handleDelete = async (id) => {
     try {
-      alert("Are you sure you want to delete?");
+      const confirmed = window.confirm("Are you sure you want to delete?");
+      if (!confirmed) {
+        toast.error("Deletion cancelled.");
+        return;
+      }
+
       await utils.deleteEvent(id);
-      setEvents(events.filter((event) => event.id === id));
+      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+
+      toast.success("Event deleted successfully!");
+      navigate("/");
     } catch (error) {
       console.error(error);
+      toast.error("Failed to delete event.");
     }
   };
 
@@ -224,6 +99,7 @@ const MyCreatedEvents = () => {
                 className="w-full h-40 object-cover rounded-t-xl"
               />
               <h2 className="text-xl px-2 mt-2 text-white">{event.title}</h2>
+
               <p className="text-gray-400 px-2">{event.description}</p>
 
               <div className="flex pt-3 w-1/3 mx-auto gap-4">
@@ -247,20 +123,21 @@ const MyCreatedEvents = () => {
 
       {/* Popup Modal for Editing */}
       {editEvent && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+        <div className="fixed page-font inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
           <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-1/3 relative">
             {/* Close Button */}
             <button
               onClick={() => setEditEvent(null)}
-              className="absolute top-3 right-3 text-gray-400 hover:text-white"
+              className="absolute top-3 right-3 cursor-pointer text-gray-400 hover:text-white"
             >
               <AiOutlineClose size={20} />
             </button>
 
-            <h3 className="text-lg font-semibold text-green-300 mb-4">
+            <h3 className="text-3xl font-bold text-green-300 mb-4">
               Edit Event
             </h3>
 
+            <label className="block text-gray-200 font-medium">Title</label>
             <input
               type="text"
               className="w-full p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"
@@ -270,6 +147,7 @@ const MyCreatedEvents = () => {
               }
               placeholder="Event Title"
             />
+            <label className="block text-gray-200 font-medium">Location</label>
             <input
               type="text"
               className="w-full p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"
@@ -279,14 +157,19 @@ const MyCreatedEvents = () => {
               }
               placeholder="Event Location"
             />
+            <label className="block text-gray-200 font-medium">
+              Description
+            </label>
             <textarea
-              className="w-full p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"
+              className="w-full h-28 p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"
               value={formData.description}
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
               placeholder="Event Description"
             />
+            <label className="block text-gray-200 font-medium">Category</label>
+
             <input
               type="text"
               className="w-full p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"

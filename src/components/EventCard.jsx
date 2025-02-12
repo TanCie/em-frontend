@@ -8,7 +8,7 @@ const EventCard = ({ event }) => {
   return (
     <div className="w-full max-w-sm rounded-lg shadow-md bg-gray-900 overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       {/* Event Image */}
-      <div className="w-full h-48 relative">
+      <div className="w-full h-56 relative">
         <img
           src={event.image}
           alt={event.title}
@@ -20,7 +20,7 @@ const EventCard = ({ event }) => {
       <div className="p-4">
         {/* Title & Category */}
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-100">
+          <h3 className="text-xl font-semibold text-gray-100">
             {event.title.split(" ").slice(0, 4).join(" ")}
             {event.title.split(" ").length > 4 && ".."}
           </h3>

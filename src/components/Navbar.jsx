@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { AuthContext } from "../auth/AuthCheck";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("userId");
     logout();
-    alert("Logged out successfully");
+    toast.success("Logged out successfully");
     navigate("/");
   };
 
@@ -28,10 +29,10 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center p-4 px-6">
         <Link
           to="/"
-          className="text-3xl md:text-5xl font-bold text-green-400 my-4 flex items-center gap-2 transition-all duration-300"
+          className="text-3xl md:text-5xl text-green-400 my-4 flex items-center gap-2 transition-all duration-300"
         >
           <span className="font-extrabold text-6xl logo text-green-500">E</span>
-          <span className="text-green-100 tracking-wide">ventrr</span>
+          <span className="text-green-100 tracking-tight">ventrr</span>
         </Link>
 
         {/* Mobile Menu Button */}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,10 +24,10 @@ const Register = () => {
       );
       console.log(res.data.token);
       localStorage.setItem("token", res.data.token); // Save token
-      alert("Registration successful");
+      toast.success("Registration successful");
       navigate("/"); // Redirect to Home
     } catch (error) {
-      alert(error.response?.data?.message);
+      toast.error(error.response?.data?.message);
     }
   };
 

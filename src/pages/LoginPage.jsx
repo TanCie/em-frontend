@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../auth/AuthCheck";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,10 +21,10 @@ const Login = () => {
       const data = await res.json();
       if (data.success) {
         login(data.token, data.userId); // Store token & update state
-        alert("Login successful");
+        toast.success("Login successful");
         navigate("/");
       } else {
-        alert("Login failed");
+        toast.error("Login failed");
       }
     } catch (error) {
       alert(error.message);

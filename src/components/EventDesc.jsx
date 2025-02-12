@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import utils from "../lib/utils"; // Import API functions
 import { AuthContext } from "../auth/AuthCheck";
 import socket from "../lib/socket";
+import { SiGooglemaps } from "react-icons/si";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const EventDesc = () => {
   const { eventId } = useParams();
@@ -95,9 +97,11 @@ const EventDesc = () => {
             {event.category}
           </p>
         </div>
-        <p className="text-gray-400">📍 {event.location}</p>
-        <p className="text-gray-400">
-          📅
+        <p className="flex items-center gap-1.5 text-gray-300">
+          <SiGooglemaps className="text-red-500" /> {event.location}
+        </p>
+        <p className="flex items-center gap-1.5 text-gray-400">
+          <FaRegCalendarAlt className="text-blue-500" />
           {new Date(event.date).toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -128,7 +132,9 @@ const EventDesc = () => {
             </button>
           )
         ) : (
-          <p className="text-red-500">Please log in to join this event.</p>
+          <Link to={"/login"} className=" btn text-red-500">
+            Please log in to join this event.
+          </Link>
         )}
 
         {hasJoined && !(new Date(event.date) < new Date()) && (

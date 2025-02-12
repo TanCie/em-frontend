@@ -10,6 +10,7 @@ const CreateEventForm = ({ onSubmit }) => {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -50,6 +51,8 @@ const CreateEventForm = ({ onSubmit }) => {
       return;
     }
 
+    setLoading(true);
+
     const eventData = {
       title,
       category,
@@ -64,19 +67,19 @@ const CreateEventForm = ({ onSubmit }) => {
       await onSubmit(eventData);
     } catch (error) {
       console.error("Error submitting event:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container opacity-90 mx-auto bg-gray-800 p-8 shadow-lg rounded-lg mt-8 md:mt-6">
+    <div className="container w-3/4 lg:w-2/3 opacity-90 mx-auto bg-gray-800 p-8 shadow-lg rounded-lg my-8 md:my-6">
       <h2 className="text-3xl font-semibold text-center text-green-100 mb-10">
         Create New Event
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Grid Wrapper */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Title */}
           <div>
             <label className="block text-gray-200 font-medium mb-2">
               Event Title
@@ -90,7 +93,6 @@ const CreateEventForm = ({ onSubmit }) => {
             />
           </div>
 
-          {/* Category */}
           <div>
             <label className="block text-gray-200 font-medium mb-2">
               Category
@@ -104,7 +106,6 @@ const CreateEventForm = ({ onSubmit }) => {
             />
           </div>
 
-          {/* Location */}
           <div>
             <label className="block text-gray-200 font-medium mb-2">
               Location
@@ -118,7 +119,6 @@ const CreateEventForm = ({ onSubmit }) => {
             />
           </div>
 
-          {/* Date */}
           <div>
             <label className="block text-gray-200 font-medium mb-2">
               Event Date
@@ -132,45 +132,52 @@ const CreateEventForm = ({ onSubmit }) => {
           </div>
         </div>
 
-        {/* Description (Full Width) */}
-        <div>
-          <label className="block text-gray-200 font-medium mb-2">
-            Event Description
-          </label>
-          <textarea
-            className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-            placeholder="Enter event description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows="4"
-          />
-        </div>
-
-        {/* Image Upload */}
-        <div>
-          <label className="block text-gray-200 font-medium mb-2">
-            Upload Image
-          </label>
-          <input
-            type="file"
-            className="w-full p-2 border border-gray-400 rounded-lg"
-            onChange={handleImageChange}
-          />
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt="Event"
-              className="mt-4 w-full h-48 object-cover rounded-lg shadow-md"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-gray-200 font-medium mb-2">
+              Event Description
+            </label>
+            <textarea
+              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 h-44"
+              placeholder="Enter event description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
-          )}
+          </div>
+
+          <div>
+            <label className="block text-gray-200 font-medium mb-2">
+              Upload Image
+            </label>
+            <div className="w-full h-44 border border-gray-400 rounded-lg flex flex-col items-center justify-center bg-gray-700 relative">
+              <input
+                type="file"
+                className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                onChange={handleImageChange}
+              />
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt="Event Preview"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                <p className="text-gray-300">Click to upload image</p>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full cursor-pointer bg-green-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition duration-300"
+          className={`w-full cursor-pointer py-3 rounded-lg font-semibold text-lg transition duration-300 ${
+            loading
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700 text-white"
+          }`}
+          disabled={loading}
         >
-          Create Event
+          {loading ? "Creating..." : "Create Event"}
         </button>
       </form>
     </div>
