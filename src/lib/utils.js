@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
 
 const getAllEvents = async () => {
   try {
-    const response = await axios.get(API_URL + '/events');
+    const response = await axios.get(`${API_URL}/events`);
     return response.data;
   } catch (error) {
     console.error("Error fetching events:", error);
