@@ -21,11 +21,12 @@ const Register = () => {
         "http://localhost:5000/api/auth/signup",
         formData
       );
+      console.log(res.data.token);
       localStorage.setItem("token", res.data.token); // Save token
       alert("Registration successful");
       navigate("/"); // Redirect to Home
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response?.data?.message);
     }
   };
 
@@ -42,7 +43,7 @@ const Register = () => {
             <input
               type="text"
               name="username"
-              value={formData.name}
+              value={formData.username}
               onChange={handleChange}
               className="w-full p-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required

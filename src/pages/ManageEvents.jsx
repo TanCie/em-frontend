@@ -194,6 +194,16 @@ const MyCreatedEvents = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      alert("Are you sure you want to delete?");
+      await utils.deleteEvent(id);
+      setEvents(events.filter((event) => event.id === id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl md:text-3xl font-bold my-6 text-white">
@@ -223,7 +233,10 @@ const MyCreatedEvents = () => {
                 >
                   Edit
                 </button>
-                <button className="btn btn-sm bg-red-600 text-white hover:bg-red-700">
+                <button
+                  onClick={() => handleDelete(event._id)}
+                  className="btn btn-sm bg-red-600 text-white hover:bg-red-700"
+                >
                   Delete
                 </button>
               </div>
