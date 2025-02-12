@@ -13,7 +13,8 @@ const EventList = () => {
   const [category, setCategory] = useState("All");
 
   const categories = [
-    "All Categories",
+    "Select a Category",
+    "All",
     "technology",
     "music",
     "psychology",
@@ -55,7 +56,7 @@ const EventList = () => {
         event.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    if (category !== "All Categories") {
+    if (category !== "All") {
       filtered = filtered.filter((event) => event.category === category);
     }
     setFilteredEvents(filtered);
