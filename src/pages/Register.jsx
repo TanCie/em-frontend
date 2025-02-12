@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import utils from "../lib/utils";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("${API_URL}/auth/signup", formData);
+      const res = await axios.post(`${utils.API_URL}/auth/signup`, formData);
       console.log(res.data.token);
       localStorage.setItem("token", res.data.token); // Save token
       toast.success("Registration successful");

@@ -1,10 +1,11 @@
 import CreateEventForm from "./CreateEventForm";
 import toast from "react-hot-toast";
+import utils from "../lib/utils";
 
 export const CreateEvent = () => {
   const handleCreateEvent = async (eventData) => {
     try {
-      const response = await fetch("${API_URL}/events/create", {
+      const response = await fetch(`${utils.API_URL}/events/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(eventData),

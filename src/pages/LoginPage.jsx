@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../auth/AuthCheck";
 import toast from "react-hot-toast";
+import utils from "../lib/utils";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("${API_URL}/auth/login", {
+      const res = await fetch(`${utils.API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
