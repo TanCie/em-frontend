@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 export const CreateEvent = () => {
   const handleCreateEvent = async (eventData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/events/create", {
+      const response = await fetch("${API_URL}/events/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(eventData),

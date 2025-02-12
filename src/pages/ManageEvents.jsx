@@ -21,7 +21,7 @@ const MyCreatedEvents = () => {
   useEffect(() => {
     if (!userId) return;
 
-    fetch(`http://localhost:5000/api/event-register/my-events/${userId}`)
+    fetch(`${utils.API_URL}/event-register/my-events/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.events) {

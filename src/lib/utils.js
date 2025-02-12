@@ -80,4 +80,5 @@ export default {
   updateEvent,
   deleteEvent,
   updateForm,
+  API_URL
 };

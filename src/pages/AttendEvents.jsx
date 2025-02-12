@@ -10,7 +10,7 @@ const MyRegisteredEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/event-register/myreg-events/${userId}`
+        `${API_URL}/event-register/myreg-events/${userId}`
       );
       const data = await res.json();
       setEvents(data);
