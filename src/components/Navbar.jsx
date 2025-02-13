@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-900 text-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center p-4 px-6">
+      <div className="container mx-auto flex justify-between items-center p-3 md:p-1 px-6">
         <Link
           to="/"
           className="text-3xl md:text-5xl text-green-400 my-4 flex items-center gap-2 transition-all duration-300"

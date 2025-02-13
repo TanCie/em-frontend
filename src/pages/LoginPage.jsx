@@ -33,9 +33,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center opacity-95 items-center p-16 md:p-25">
+    <div className="flex justify-center opacity-95 items-center p-12 md:p-12">
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-green-500 mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-green-500 mb-6">
           Welcome Back!
         </h2>
 
@@ -48,7 +48,7 @@ const Login = () => {
               placeholder="john@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 mt-1.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
+              className="w-full  p-1.5 pl-3 mt-0.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -61,14 +61,14 @@ const Login = () => {
               placeholder="*********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 mt-1.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
+              className="w-full  p-1.5 pl-3 mt-0.5  border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full cursor-pointer bg-green-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition duration-300"
+            className="w-full cursor-pointer bg-green-600 text-white py-2 rounded-lg font-semibold text-sm md:text-lg hover:bg-green-700 transition duration-300"
           >
             Login
           </button>
@@ -78,11 +78,11 @@ const Login = () => {
             e.preventDefault();
             navigate("/");
           }}
-          className="w-full mt-4 cursor-pointer border border-green-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition duration-300"
+          className="w-full mt-2 cursor-pointer border border-green-600 text-white py-2 rounded-lg font-semibold text-sm md:text-lg hover:bg-green-700 transition duration-300"
         >
           Guest Login
         </button>
-        <p className="text-gray-400 text-center mt-4">
+        <p className="text-gray-400 text-sm text-center mt-2">
           New here?{" "}
           <Link to="/signup" className="text-green-400 hover:underline">
             Create new account

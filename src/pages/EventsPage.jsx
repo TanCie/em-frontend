@@ -75,18 +75,18 @@ const EventList = () => {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         {/* Search Bar */}
         <div className="relative flex-1">
-          <FaSearch className="absolute left-5 top-5 text-gray-300" />
+          <FaSearch className="absolute left-4 top-4 text-gray-300" />
           <input
             type="text"
             placeholder="Search events..."
-            className="input w-full rounded-full pl-12 pr-4 h-14"
+            className="input w-full rounded-full pl-10 pr-4 h-12"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         {/* Category Dropdown */}
 
-        <div className="relative w-2/3 sm:w-1/3">
+        <div className="relative w-1/3">
           <select
             className="block cursor-pointer w-full px-4 py-3 text-white bg-gray-800 border border-gray-600 rounded-lg shadow-md appearance-none"
             value={category}
@@ -109,7 +109,7 @@ const EventList = () => {
         <h2 className=" text-2xl md:text-5xl font-semibold my-10">
           Upcoming Events
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-2 md:px-10">
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event) => (
               <EventCard key={event._id} event={event} />

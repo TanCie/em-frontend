@@ -84,46 +84,52 @@ const MyCreatedEvents = () => {
       <h2 className="text-2xl md:text-3xl font-bold mb-10 text-white">
         My Created Events
       </h2>
-      <div className="flex flex-col items-center justify-center gap-6 flex-wrap">
-        {events.length === 0 ? (
-          <p className="text-center text-gray-400">No events found.</p>
-        ) : (
-          events.map((event) => (
-            <div
-              key={event._id}
-              className="min-w-1/3 max-w-2/3 rounded-xl bg-gray-800 p-1 pb-6 shadow-lg hover:shadow-xl transition-all"
-            >
-              <img
-                src={event.image}
-                alt=""
-                className="w-full h-60 object-cover rounded-t-xl"
-              />
-              <h2 className="text-xl px-2 mt-2 font-semibold text-white">
-                {event.title}
-              </h2>
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center gap-6 flex-wrap">
+          {events.length === 0 ? (
+            <p className="text-center text-gray-400">No events found.</p>
+          ) : (
+            events.map((event) => (
+              <div
+                key={event._id}
+                className="min-w-1/3 max-w-2/3 rounded-xl bg-gray-800 p-1 pb-6 shadow-lg hover:shadow-xl transition-all"
+              >
+                <img
+                  src={event.image}
+                  alt=""
+                  className="w-full h-60 object-cover rounded-t-xl"
+                />
+                <h2 className="text-xl px-2 mt-2 font-semibold text-white">
+                  {event.title}
+                </h2>
 
-              <p className="text-gray-400 px-2 mt-2 italic">
-                {event.description}
-              </p>
+                <p className="text-gray-400 px-2 mt-2 italic">
+                  {event.description}
+                </p>
 
-              <div className="flex mt-auto flex-col pt-3 w-1/2 mx-auto gap-4">
-                <button
-                  onClick={() => handleEditClick(event)}
-                  className="btn btn-sm rounded-lg bg-green-600 text-white hover:bg-green-700"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(event._id)}
-                  className="btn btn-sm rounded-lg bg-red-600 text-white hover:bg-red-700"
-                >
-                  Delete
-                </button>
+                <div className="flex mt-auto flex-col pt-3 w-1/2 mx-auto gap-4">
+                  <button
+                    onClick={() => handleEditClick(event)}
+                    className="btn btn-sm rounded-lg bg-green-600 text-white hover:bg-green-700"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(event._id)}
+                    className="btn btn-sm rounded-lg bg-red-600 text-white hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
+      )}
 
       {/* Popup Modal for Editing */}
       {editEvent && (

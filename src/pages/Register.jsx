@@ -30,8 +30,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center opacity-95 items-center p-16 md:p-24">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
+    <div className="flex justify-center opacity-95 items-center p-8 md:p-10">
+      <div className="bg-gray-800 p-6 rounded-xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-green-400 mb-6">
           Create Account
         </h2>
@@ -45,7 +45,7 @@ const Register = () => {
               placeholder="John Doe"
               value={formData.username}
               onChange={handleChange}
-              className="w-full p-3 mt-1.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
+              className="w-full p-1.5 pl-3 mt-0.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -58,7 +58,7 @@ const Register = () => {
               placeholder="john@email.com"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 mt-1.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
+              className="w-full  p-1.5 pl-3 mt-0.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -71,19 +71,19 @@ const Register = () => {
               placeholder="********"
               value={formData.password}
               onChange={handleChange}
-              className="w-full p-3 mt-1.5 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
+              className="w-full p-1.5 pl-3 mt-0.5  border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-green-600 cursor-pointer text-white py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition duration-300"
+            className="w-full bg-green-600 cursor-pointer text-white py-2 rounded-lg font-semibold text-sm md:text-lg hover:bg-green-700 transition duration-300"
           >
             Register
           </button>
 
-          <p className="text-gray-400 text-center mt-4">
+          <p className="text-gray-400 text-sm text-center">
             Already have an account?{" "}
             <Link to="/login" className="text-green-400 hover:underline">
               Login

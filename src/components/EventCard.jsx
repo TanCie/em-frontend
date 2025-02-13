@@ -20,11 +20,11 @@ const EventCard = ({ event }) => {
       <div className="p-4">
         {/* Title & Category */}
         <div className="flex justify-between items-center">
-          <h3 className="text-xl font-semibold text-gray-100">
-            {event.title.split(" ").slice(0, 4).join(" ")}
+          <h3 className="text-lg font-semibold text-gray-100">
+            {event.title.split(" ").slice(0, 3).join(" ")}
             {event.title.split(" ").length > 4 && ".."}
           </h3>
-          <span className="px-4 py-1 border border-green-600 text-green-500 text-xs font-medium ml-1.5 rounded-full">
+          <span className="px-4 py-1 border border-pink-500 text-pink-400 text-xs font-medium ml-1.5 rounded-full">
             {event.category}
           </span>
         </div>
