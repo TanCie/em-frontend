@@ -114,9 +114,11 @@ const EventList = () => {
       {/* Upcoming Events */}
 
       <div className="flex flex-col items-center justify-center">
-        <h2 className=" text-2xl md:text-5xl font-semibold my-10">
-          Upcoming Events
+        <h2 className="relative text-2xl md:text-5xl font-semibold my-10 text-white px-6">
+          <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-10 md:h-16 bg-black opacity-70 rounded-full blur-md"></span>
+          <span className="relative">Upcoming Events</span>
         </h2>
+
         {loading ? (
           <LoadingSkeleton />
         ) : (
@@ -133,8 +135,9 @@ const EventList = () => {
       </div>
       {/* Past Events */}
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-2xl md:text-5xl font-semibold mt-16 mb-6">
-          Past Events
+        <h2 className="relative text-2xl md:text-5xl font-semibold my-10 text-white px-6">
+          <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-10 md:h-16 bg-black opacity-70 rounded-full blur-md"></span>
+          <span className="relative">Past Events</span>
         </h2>
         {loading ? (
           <LoadingSkeleton />
