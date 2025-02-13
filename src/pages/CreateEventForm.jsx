@@ -12,6 +12,7 @@ const CreateEventForm = ({ onSubmit }) => {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
 
   const categories = [
     "Select a category",
@@ -31,6 +32,8 @@ const CreateEventForm = ({ onSubmit }) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    setImgLoading(true);
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "eventmpics");
@@ -49,6 +52,8 @@ const CreateEventForm = ({ onSubmit }) => {
       console.log("Image uploaded:", data.secure_url);
     } catch (error) {
       console.error("Error uploading image:", error);
+    } finally {
+      setImgLoading(false);
     }
   };
 
@@ -179,14 +184,18 @@ const CreateEventForm = ({ onSubmit }) => {
                 className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                 onChange={handleImageChange}
               />
-              {imageUrl ? (
+              {!imageUrl && !imgLoading && (
+                <p className="text-gray-300">Click to upload image</p>
+              )}
+              {imgLoading && (
+                <span className="loading loading-bars loading-lg"></span>
+              )}
+              {imageUrl && !imgLoading && (
                 <img
                   src={imageUrl}
                   alt="Event Preview"
                   className="w-full h-full object-cover rounded-lg"
                 />
-              ) : (
-                <p className="text-gray-300">Click to upload image</p>
               )}
             </div>
           </div>

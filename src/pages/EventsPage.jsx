@@ -62,7 +62,9 @@ const EventList = () => {
       );
     }
     if (category !== "All") {
-      filtered = filtered.filter((event) => event.category === category);
+      filtered = filtered.filter(
+        (event) => event.category.toLowerCase() === category.toLowerCase()
+      );
     }
     setFilteredEvents(filtered);
   }, [searchQuery, category, events]);

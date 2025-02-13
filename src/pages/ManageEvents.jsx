@@ -20,6 +20,20 @@ const MyCreatedEvents = () => {
     category: "",
   });
 
+  const categories = [
+    "Select a category",
+    "arts & Theater",
+    "sports",
+    "beauty & Wellness",
+    "education",
+    "relationships",
+    "music",
+    "social media",
+    "technology",
+    "food",
+    "psychology",
+  ];
+
   useEffect(() => {
     if (!userId) return;
 
@@ -179,17 +193,25 @@ const MyCreatedEvents = () => {
               }
               placeholder="Event Description"
             />
-            <label className="block text-gray-200 font-medium">Category</label>
 
-            <input
-              type="text"
-              className="w-full p-2 my-2 border border-gray-600 rounded bg-gray-800 text-white"
+            <label className="block text-gray-200 font-medium">Category</label>
+            <select
+              className="block cursor-pointer w-full px-4 py-2 my-1.5 text-gray-200 border bg-gray-800 border-gray-400 rounded-lg shadow-md appearance-none"
               value={formData.category}
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              placeholder="Event Category"
-            />
+            >
+              {categories.map((cat) => (
+                <option
+                  value={cat}
+                  key={cat}
+                  className="text-gray-200 text-sm py-0.5"
+                >
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
 
             {/* Buttons */}
             <div className="flex justify-end gap-3 mt-4">
