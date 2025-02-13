@@ -16,13 +16,13 @@ const CreateEventForm = ({ onSubmit }) => {
 
   const categories = [
     "Select a category",
-    "arts & Theater",
+    "general",
+    "theater",
     "sports",
-    "beauty & Wellness",
     "education",
     "relationships",
     "music",
-    "social media",
+    "social",
     "technology",
     "food",
     "psychology",

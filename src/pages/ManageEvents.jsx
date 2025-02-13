@@ -22,13 +22,13 @@ const MyCreatedEvents = () => {
 
   const categories = [
     "Select a category",
-    "arts & Theater",
+    "general",
+    "theater",
     "sports",
-    "beauty & Wellness",
     "education",
     "relationships",
     "music",
-    "social media",
+    "social",
     "technology",
     "food",
     "psychology",
@@ -70,8 +70,10 @@ const MyCreatedEvents = () => {
         )
       );
       setEditEvent(null);
+      toast.success("Event updated successfully");
     } catch (error) {
       console.error("Error updating event:", error);
+      toast.error("Failed to update event.");
     } finally {
       setLoading(false);
     }
@@ -97,14 +99,14 @@ const MyCreatedEvents = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-900 opacity-80 mx-auto mt-0 rounded-lg p-6">
+    <div className="flex flex-col items-center justify-center bg-gray-900 opacity-75 mx-auto mt-0 rounded-lg p-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-10 text-white">
         My Created Events
       </h2>
       {fetching ? (
         <LoadingSkeleton />
       ) : (
-        <div className="flex flex-col items-center justify-center gap-6 flex-wrap">
+        <div className="flex flex-col flex-wrap  items-center min-w-xl max-w-2xl justify-center gap-6">
           {events.length === 0 ? (
             <p className="text-center text-gray-400">No events found.</p>
           ) : (
@@ -122,7 +124,7 @@ const MyCreatedEvents = () => {
                   {event.title}
                 </h2>
 
-                <p className="text-gray-400 px-2 mt-2 italic">
+                <p className="text-gray-300 px-2 mt-2 italic">
                   {event.description}
                 </p>
 
@@ -212,6 +214,10 @@ const MyCreatedEvents = () => {
                 </option>
               ))}
             </select>
+            <span className="text-sm flex mt-5 justify-center italic text-green-200">
+              {" "}
+              (other fields cannot be updated)
+            </span>
 
             {/* Buttons */}
             <div className="flex justify-end gap-3 mt-4">
