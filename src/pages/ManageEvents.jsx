@@ -4,6 +4,7 @@ import { AuthContext } from "../auth/AuthCheck";
 import utils from "../lib/utils";
 import { AiOutlineClose } from "react-icons/ai";
 import toast from "react-hot-toast";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 
 const MyCreatedEvents = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const MyCreatedEvents = () => {
   const [events, setEvents] = useState([]);
   const [editEvent, setEditEvent] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -30,7 +32,8 @@ const MyCreatedEvents = () => {
           console.error("Failed to fetch events", data);
         }
       })
-      .catch((error) => console.error("Error fetching events:", error));
+      .catch((error) => console.error("Error fetching events:", error))
+      .finally(() => setFetching(false));
   }, [userId]);
 
   const handleEditClick = (event) => {
@@ -84,10 +87,8 @@ const MyCreatedEvents = () => {
       <h2 className="text-2xl md:text-3xl font-bold mb-10 text-white">
         My Created Events
       </h2>
-      {loading ? (
-        <div className="flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
+      {fetching ? (
+        <LoadingSkeleton />
       ) : (
         <div className="flex flex-col items-center justify-center gap-6 flex-wrap">
           {events.length === 0 ? (

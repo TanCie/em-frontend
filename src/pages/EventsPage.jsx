@@ -5,12 +5,14 @@ import EventCard from "../components/EventCard";
 import { FaSearch } from "react-icons/fa";
 import { MdArrowDropDown } from "react-icons/md";
 import socket from "../lib/socket";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const categories = [
     "Select a Category",
@@ -33,7 +35,7 @@ const EventList = () => {
         console.error("Error fetching events:", error);
       }
     };
-    fetchEvents();
+    fetchEvents().finally(() => setLoading(false));
 
     socket.on("eventUpdated", (updatedEvent) => {
       setEvents((prevEvents) =>
@@ -105,34 +107,43 @@ const EventList = () => {
       </div>
 
       {/* Upcoming Events */}
+
       <div className="flex flex-col items-center justify-center">
         <h2 className=" text-2xl md:text-5xl font-semibold my-10">
           Upcoming Events
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-2 md:px-10">
-          {upcomingEvents.length > 0 ? (
-            upcomingEvents.map((event) => (
-              <EventCard key={event._id} event={event} />
-            ))
-          ) : (
-            <p className="text-center">No upcoming events found.</p>
-          )}
-        </div>
+        {loading ? (
+          <LoadingSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-2 md:px-10">
+            {upcomingEvents.length > 0 ? (
+              upcomingEvents.map((event) => (
+                <EventCard key={event._id} event={event} />
+              ))
+            ) : (
+              <p className="text-center">No upcoming events found.</p>
+            )}
+          </div>
+        )}
       </div>
       {/* Past Events */}
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-2xl md:text-5xl font-semibold mt-16 mb-6">
           Past Events
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {pastEvents.length > 0 ? (
-            pastEvents.map((event) => (
-              <EventCard key={event._id} event={event} />
-            ))
-          ) : (
-            <p>No past events found.</p>
-          )}
-        </div>
+        {loading ? (
+          <LoadingSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {pastEvents.length > 0 ? (
+              pastEvents.map((event) => (
+                <EventCard key={event._id} event={event} />
+              ))
+            ) : (
+              <p>No past events found.</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
