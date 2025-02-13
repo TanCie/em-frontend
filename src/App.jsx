@@ -8,6 +8,7 @@ import { AuthProvider } from "./auth/AuthCheck";
 import EventDesc from "./components/EventDesc";
 import ManageEvents from "./pages/ManageEvents";
 import { Toaster } from "react-hot-toast";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             path="/event-register/my-events/:userId"
             element={<ManageEvents />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
       </div>
