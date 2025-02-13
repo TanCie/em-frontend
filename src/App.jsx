@@ -15,18 +15,20 @@ function App() {
     <AuthProvider>
       <div className="min-h-screen bgimg">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<EventsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/create" element={<CreateEvent />} />
-          <Route path="/events/:eventId" element={<EventDesc />} />
-          <Route
-            path="/event-register/my-events/:userId"
-            element={<ManageEvents />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="page-font">
+          <Routes>
+            <Route path="/" element={<EventsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/create" element={<CreateEvent />} />
+            <Route path="/events/:eventId" element={<EventDesc />} />
+            <Route
+              path="/event-register/my-events/:userId"
+              element={<ManageEvents />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
         <Toaster />
       </div>
     </AuthProvider>

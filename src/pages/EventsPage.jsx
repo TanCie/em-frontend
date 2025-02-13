@@ -17,12 +17,16 @@ const EventList = () => {
   const categories = [
     "Select a Category",
     "All",
-    "technology",
-    "music",
-    "psychology",
+    "arts & Theater",
     "sports",
+    "beauty & Wellness",
+    "education",
+    "relationships",
+    "music",
+    "social media",
+    "technology",
     "food",
-    "social",
+    "psychology",
   ];
 
   useEffect(() => {

@@ -44,7 +44,7 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-10 text-lg italic">
+        <div className="hidden page-font md:flex space-x-10 text-lg italic">
           {isLoggedIn ? (
             <>
               <Link to="/create" className="hover:text-green-400 transition">

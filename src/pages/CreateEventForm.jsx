@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../auth/AuthCheck";
+import toast from "react-hot-toast";
 
 const CreateEventForm = ({ onSubmit }) => {
   const { userId } = useContext(AuthContext);
@@ -11,6 +12,20 @@ const CreateEventForm = ({ onSubmit }) => {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const categories = [
+    "Select a category",
+    "arts & Theater",
+    "sports",
+    "beauty & Wellness",
+    "education",
+    "relationships",
+    "music",
+    "social media",
+    "technology",
+    "food",
+    "psychology",
+  ];
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -47,7 +62,7 @@ const CreateEventForm = ({ onSubmit }) => {
       !location ||
       !date
     ) {
-      alert("Please fill in all fields!");
+      toast.error("Please fill in all fields!");
       return;
     }
 
@@ -97,13 +112,21 @@ const CreateEventForm = ({ onSubmit }) => {
             <label className="block text-gray-200 font-medium mb-2">
               Category
             </label>
-            <input
-              type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              placeholder="Enter event category"
+            <select
+              className="block cursor-pointer w-full px-4 py-3 text-gray-200 border bg-gray-800 border-gray-400 rounded-lg shadow-md appearance-none"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            />
+            >
+              {categories.map((cat) => (
+                <option
+                  value={cat}
+                  key={cat}
+                  className="text-gray-200 text-sm py-0.5"
+                >
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
@@ -152,6 +175,7 @@ const CreateEventForm = ({ onSubmit }) => {
             <div className="w-full h-44 border border-gray-400 rounded-lg flex flex-col items-center justify-center bg-gray-700 relative">
               <input
                 type="file"
+                accept="image/*"
                 className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                 onChange={handleImageChange}
               />

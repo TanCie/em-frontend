@@ -68,7 +68,16 @@ const EventDesc = () => {
     }
   };
 
-  if (loading) return <div className="p-4 text-center">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex mt-10 mx-auto w-68 md:w-60 flex-col gap-4">
+        <div className="skeleton  bg-gray-700 h-40 w-full"></div>
+        <div className="skeleton  bg-gray-700 h-4 w-28"></div>
+        <div className="skeleton  bg-gray-700 h-4 w-full"></div>
+        <div className="skeleton  bg-gray-700 h-4 w-full"></div>
+      </div>
+    );
+  }
   if (error) return <div className="p-4 text-center text-red-500">{error}</div>;
   if (!event) return <div className="p-4 text-center">Event not found</div>;
 
