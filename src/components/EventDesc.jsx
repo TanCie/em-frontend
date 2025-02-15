@@ -152,7 +152,7 @@ const EventDesc = () => {
             </Link>
           )}
 
-          {hasJoined && !(new Date(event.date) < new Date()) && (
+          {hasJoined && isLoggedIn && !(new Date(event.date) < new Date()) && (
             <button onClick={handleLeaveEvent} className="btn bg-red-700">
               Leave Event
             </button>
